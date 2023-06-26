@@ -90,19 +90,19 @@ Este é um projeto de um caixa eletrônico funcional desenvolvido em JavaScript.
 
 // Função de transferência
  
-			function fazer_deposito() {
-				var deposito = parseFloat(prompt('Qual o valor para depósito?'));
-				// Not a Number
-				if (isNaN(deposito) || deposito === '') {
-					alert('Por favor, informe um número:');
-					fazer_deposito();
-				} else if(deposito <= 0){
-					alert('Operação não autorizada. O valor de depósito tem que ser maior que 0.')
-				} else {
-					saldo += deposito;
-					// saldo = saldo + deposito;
-					ver_saldo();
-   }
- }
+function fazer_deposito() {
+var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+// Not a Number
+if (isNaN(deposito) || deposito === '') {
+	alert('Por favor, informe um número:');
+	fazer_deposito();
+} else if(deposito <= 0){
+	alert('Operação não autorizada. O valor de depósito tem que ser maior que 0.')
+} else {
+	saldo += deposito;
+	// saldo = saldo + deposito;
+	ver_saldo();
+  }
+}
+	
 
-  
