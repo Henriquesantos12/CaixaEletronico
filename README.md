@@ -1,166 +1,62 @@
-# CaixaEletronico
-Caixa eletrônico funcional
+# Caixa Eletrônico Funcional em JavaScript
 
-var saldo = 100.5; //Float
-		var senha_ja_informada = false;
+## Descrição
+Este é um projeto de um caixa eletrônico funcional desenvolvido em JavaScript. Ele permite realizar operações como autenticação com senha, saque e transferência de valores.
 
-		function identificacao(){
-			var nome = prompt(`Qual o seu nome?`);
-			alert(`Olá ${nome} é um prazer ter você aqui`);
-			return nome;
-		}
+## Recursos
 
-			var nomeUsuario = identificacao() // a variavel vai ser preenchida pelo que a função retornar 
-			console.log(nomeUsuario)
-			inicio()
+### Autenticação com Senha
+- Solicita ao usuário que insira a senha para acessar o caixa eletrônico.
+- Verifica se a senha inserida está correta.
+- Permite um número máximo de tentativas de senha.
 
-			function acesso(){
-				if(senha_ja_informada){
-					return true;
-				} else {
-					var inserir_senha = prompt(`Digite sua senha`)
+### Saque
+- Permite ao usuário sacar um valor específico de sua conta.
+- Verifica se o valor de saque é válido e se há saldo suficiente na conta.
+- Atualiza o saldo da conta após o saque.
 
-					if(inserir_senha == 666){
-						return true;
-					} else{
-						alert('A senha está incorreta. Tente novamente.');
-						acesso();
-					}
-				}
-			}
+### Transferência
+- Permite ao usuário transferir um valor específico para outra conta.
+- Verifica se o valor de transferência é válido e se há saldo suficiente na conta.
+- Atualiza o saldo da conta de origem e destino após a transferência.
 
-			function inicio() {
-				var escolha = parseInt(prompt('Selecione uma opção 1.) Saldo 2.) Depósito 3.) Saque 4.) Extrato 5.) Transferência 6.) Sair'));
+## Lógica de Programação
 
-				switch (escolha){
-					case 1:
-						ver_saldo();
-						break;
-					case 2:
-						fazer_deposito();
-						break;
-					case 3:
-						fazer_saque();
-						break;
-					case 4:
-						extrato()
-						break
-					case 5:
-						conta_transferencia()
-						break
-					case 6:
-						sair();
-						break;
-					default:
-						alert(`Escolha inválida. Tente novamente.`);
-						inicio();
-				}
-			}		
+### Autenticação com Senha
+1. Solicite ao usuário que insira a senha.
+2. Compare a senha inserida com a senha armazenada.
+3. Se a senha for correta, dê acesso ao caixa eletrônico.
+4. Caso contrário, informe que a senha está incorreta e dê a opção de tentar novamente.
+5. Repita as etapas 1 a 4 até que a senha correta seja inserida ou o número máximo de tentativas seja atingido.
 
-			function ver_saldo() {
-				if(acesso()){
-					alert(`Seu saldo é: ${saldo}`);
-					inicio();
-				} else {
-					ver_saldo();
-				}
-			}
+### Saque
+1. Solicite ao usuário que insira o valor de saque.
+2. Verifique se o valor de saque é válido (positivo e múltiplo das notas disponíveis).
+3. Verifique se há saldo suficiente na conta para o saque.
+4. Se todas as verificações forem bem-sucedidas, atualize o saldo da conta e entregue as notas correspondentes ao valor de saque.
+5. Caso contrário, exiba uma mensagem informando o motivo pelo qual o saque não pode ser realizado.
 
-			function fazer_deposito() {
-				var deposito = parseFloat(prompt('Qual o valor para depósito?'));
-				// Not a Number
+### Transferência
+1. Solicite ao usuário que insira o valor a ser transferido e a conta de destino.
+2. Verifique se o valor da transferência é válido (positivo e menor ou igual ao saldo da conta de origem).
+3. Verifique se a conta de destino é válida (existente no sistema).
+4. Se todas as verificações forem bem-sucedidas, atualize o saldo da conta de origem e destino.
+5. Caso contrário, exiba uma mensagem informando o motivo pelo qual a transferência não pode ser realizada.
 
-				if (isNaN(deposito) || deposito === '') {
-					alert('Por favor, informe um número:');
-					fazer_deposito();
-				} else if(deposito <= 0){
-					alert('Operação não autorizada. O valor de depósito tem que ser maior que 0.')
-				} else {
-					saldo += deposito;
-					// saldo = saldo + deposito;
-					ver_saldo();
-				}
-			}
+## Exemplo de Uso
 
-			function fazer_saque() { // ta pedindo a senha duas vezes
-				var saque = parseFloat(prompt('Qual o valor para saque?'));
+```javascript
+// Função de autenticação com senha
+function autenticarSenha(senha) {
+  // Lógica de verificação da senha
+}
 
-				if(acesso()){
-					if(saque <= 0) {
-					alert(`Operação não autorizada. O valor de saque tem que maior que 0.`)
-					inicio()
-				} else if (saque > saldo){
-					alert(`Operação não autorizada. Seu saldo é menor que o valor de saque.`);
-					ver_saldo()
-					inicio()
-				} else if (isNaN(saque) || saque === '') {
-					alert('Por favor, informe um número:');
-					fazer_saque();
-				} else {
-					saldo -= saque;
-					senha_ja_informada = true;
-					ver_saldo();
-				}
-					inicio();
-				} else {
-					ver_saldo()
-				}
-			}
+// Função de saque
+function sacar(valor) {
+  // Lógica de verificação e atualização do saldo após o saque
+}
 
-			function erro() {
-				alert('Por favor, informe um número entre 1 e 6');
-				inicio();
-			}
-
-			function sair() { // ta repetindo 3 vezes e pede para informar o nome novamente 
-				let confirma = confirm('Você deseja sair?');
-				if (confirma) {
-					alert(`${nomeUsuario}, foi um prazer ter você aqui!`)
-					window.close();
-				} else {
-					inicio();
-				}
-			}
-
-			sair()
-
-			function extrato() {
-				if(acesso()){
-					alert(`Supermercado Da Praça: R$ 250,00\nMC Donalds: R$ 78,90\nShein: R$ 256,80\nAmazon: R$ 31,90`)
-					inicio();
-				} else {
-					acesso()
-				}
-			}
-
-			function conta_transferencia() { 
-				
-				var conta = parseInt(prompt(`Informe o número da conta que irá fazer a transferência.`))
-
-				if(isNaN(conta) || conta === '' ){
-					alert('Por favor, informe um número:');
-					conta_transferencia();
-				} else {
-					valor_transferencia()
-				}
-			}
-
-			function valor_transferencia() {
-			var valor = parseFloat(prompt(`Informe o valor da transferência.`))
-
-					if(valor <= 0) {
-						alert(`Operação não autorizada. O valor de transferência tem que ser maior que 0.`)
-						inicio()
-					} else if (valor > saldo){
-						alert(`Operação não autorizada. Seu saldo é menor que o valor de transferência.`);
-						inicio()
-					} else if ((isNaN(valor)) || valor === '') {
-						alert('Por favor, informe um número:');
-						valor_transferencia();
-					} else {
-						saldo -= valor;
-						ver_saldo();
-					}
-				}
-			
-			identificacao();
+// Função de transferência
+function transferir(valor, contaDestino) {
+  // Lógica de verificação e atualização do saldo após a transferência
+}
