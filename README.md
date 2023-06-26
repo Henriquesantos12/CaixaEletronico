@@ -53,7 +53,29 @@ function autenticarSenha(senha) {
 
 // Função de saque
 function sacar(valor) {
-  // Lógica de verificação e atualização do saldo após o saque
+ function fazer_saque() { // ta pedindo a senha duas vezes
+    var saque = parseFloat(prompt('Qual o valor para saque?'));
+    if(acesso()){
+      if(saque <= 0) {
+      alert(`Operação não autorizada. O valor de saque tem que maior que 0.`)
+      inicio()
+    } else if (saque > saldo){
+      alert(`Operação não autorizada. Seu saldo é menor que o valor de saque.`);
+      ver_saldo()
+      inicio()
+    } else if (isNaN(saque) || saque === '') {
+      alert('Por favor, informe um número:');
+      fazer_saque();
+    } else {
+      saldo -= saque;
+      senha_ja_informada = true;
+      ver_saldo();
+    }
+      inicio();
+    } else {
+      ver_saldo()
+    }
+  }
 }
 
 // Função de transferência
