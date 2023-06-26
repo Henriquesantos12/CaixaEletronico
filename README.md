@@ -48,12 +48,24 @@ Este é um projeto de um caixa eletrônico funcional desenvolvido em JavaScript.
 ```javascript
 // Função de autenticação com senha
 function autenticarSenha(senha) {
-  // Lógica de verificação da senha
-}
-
+ 
+  function acesso(){
+      if(senha_ja_informada){
+        return true;
+      } else {
+        var inserir_senha = prompt(`Digite sua senha`)
+        if(inserir_senha == 666){
+          return true;
+        } else{
+        alert('A senha está incorreta. Tente novamente.');
+        acesso();
+      }
+    }
+  }
+  
 // Função de saque
-function sacar(valor) {
- function fazer_saque() { // ta pedindo a senha duas vezes
+
+  function fazer_saque() { // ta pedindo a senha duas vezes
     var saque = parseFloat(prompt('Qual o valor para saque?'));
     if(acesso()){
       if(saque <= 0) {
@@ -76,9 +88,6 @@ function sacar(valor) {
       ver_saldo()
     }
   }
-}
 
 // Função de transferência
-function transferir(valor, contaDestino) {
-  // Lógica de verificação e atualização do saldo após a transferência
-}
+  
